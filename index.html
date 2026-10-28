@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para mi dulce de leche 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#ffd6e5; --bg2:#ffb3cf; --bg3:#ff8fb8;
+  --card:rgba(255,255,255,.74); --text:#8a1f4b; --sub:#b03a6a;
+  --heart:#e0245e; --shadow:rgba(224,36,94,.35);
+  --field:rgba(255,255,255,.9); --bubble:rgba(255,255,255,.88);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg1:#3b0f26; --bg2:#5a1236; --bg3:#7a1745;
+    --card:rgba(40,8,24,.62); --text:#ffd6e5; --sub:#ff9fc0;
+    --heart:#ff4d88; --shadow:rgba(255,77,136,.4);
+    --field:rgba(255,255,255,.12); --bubble:rgba(70,14,42,.9);
+  }
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100%;overflow-x:hidden;
+  font-family:'Quicksand',system-ui,sans-serif;color:var(--text);
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+  background-color:var(--bg2);background-attachment:fixed;
+  display:flex;align-items:center;justify-content:center;
+}
+#rain{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fall{position:absolute;top:-40px;animation:fall linear forwards;opacity:.85;user-select:none}
+@keyframes fall{to{transform:translateY(115vh) rotate(360deg)}}
+.card{
+  position:relative;z-index:1;width:min(92%,520px);margin:24px auto;
+  padding:32px 22px 28px;text-align:center;
+  background:var(--card);border-radius:28px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  box-shadow:0 20px 50px var(--shadow);
+  border:2px solid rgba(255,255,255,.5);
+  animation:appear .8s ease both;
+}
+@keyframes appear{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.hidden{display:none}
+.big{
+  font-size:84px;line-height:1;display:inline-block;
+  animation:beat 1.2s ease-in-out infinite;
+  filter:drop-shadow(0 6px 12px var(--shadow));
+}
+.big.small{font-size:64px}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+h1{
+  font-family:'Dancing Script','Brush Script MT',cursive;
+  font-size:clamp(2.1rem,9vw,3.1rem);margin:10px 0 6px;color:var(--heart);line-height:1.1;
+}
+p{font-size:1.1rem;line-height:1.55;margin:10px 0;color:var(--text)}
+.dulce{
+  font-family:'Dancing Script','Brush Script MT',cursive;
+  font-size:clamp(2rem,9vw,2.8rem);font-weight:700;color:var(--sub);margin:14px 0 4px;
+}
+.row{font-size:26px;letter-spacing:6px;margin:14px 0;animation:sway 3s ease-in-out infinite}
+@keyframes sway{50%{transform:translateY(-6px)}}
+label{display:block;text-align:left;font-weight:600;margin:14px 6px 6px;color:var(--sub);font-size:.95rem}
+input{
+  width:100%;padding:14px 18px;border-radius:999px;font:600 1rem 'Quicksand',system-ui,sans-serif;
+  border:2px solid rgba(224,36,94,.35);background:var(--field);color:var(--text);outline:none;
+}
+input:focus{border-color:var(--heart);box-shadow:0 0 0 4px var(--shadow)}
+button{
+  margin-top:18px;padding:13px 28px;border:0;border-radius:999px;cursor:pointer;
+  font:600 1rem 'Quicksand',system-ui,sans-serif;color:#fff;
+  background:linear-gradient(135deg,#ff5c93,#e0245e);
+  box-shadow:0 8px 20px var(--shadow);transition:transform .15s;
+}
+button:active{transform:scale(.95)}
+button.link{background:none;box-shadow:none;color:var(--sub);text-decoration:underline;padding:6px;margin-top:10px;font-size:.92rem}
+#err{min-height:1.4em;margin:10px 0 0;font-size:.98rem;color:var(--heart);font-weight:600}
+#hint{min-height:1.4em;margin:2px 0 0;font-size:.98rem;color:var(--sub)}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.burst{position:fixed;pointer-events:none;z-index:5;font-size:22px;animation:pop 1.1s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--dx),var(--dy)) scale(1.4);opacity:0}}
+.bubble{
+  position:fixed;z-index:6;pointer-events:none;max-width:min(75vw,300px);
+  padding:16px 22px;border-radius:30px 30px 30px 8px;text-align:center;
+  font:600 1.08rem/1.4 'Quicksand',system-ui,sans-serif;color:var(--text);
+  background:var(--bubble);border:2px solid rgba(255,140,185,.7);
+  box-shadow:0 10px 28px var(--shadow), inset 0 0 14px rgba(255,255,255,.5);
+  animation:float 5.5s ease-out forwards;
+}
+@keyframes float{
+  0%{opacity:0;transform:translateY(20px) scale(.6)}
+  12%{opacity:1;transform:translateY(0) scale(1.05)}
+  25%{transform:translateY(-30px) scale(1)}
+  80%{opacity:1}
+  100%{opacity:0;transform:translateY(-55vh) scale(1)}
+}
+.couple{display:block;width:min(100%,320px);height:auto;margin:14px auto 0;overflow:visible;animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.couple .hl,.couple .hr{transform-box:view-box}
+.couple .hl{transform-origin:95px 122px;animation:kissL 6s ease-in-out infinite}
+.couple .hr{transform-origin:205px 122px;animation:kissR 6s ease-in-out infinite}
+@keyframes kissL{0%,30%{transform:none}45%,62%{transform:translate(24px,4px) rotate(9deg)}78%,100%{transform:none}}
+@keyframes kissR{0%,30%{transform:none}45%,62%{transform:translate(-24px,4px) rotate(-9deg)}78%,100%{transform:none}}
+.couple .eo{animation:eo 6s infinite}
+.couple .ec{opacity:0;animation:ec 6s infinite}
+@keyframes eo{0%,38%{opacity:1}44%,64%{opacity:0}70%,100%{opacity:1}}
+@keyframes ec{0%,38%{opacity:0}44%,64%{opacity:1}70%,100%{opacity:0}}
+.couple .bigheart{transform-box:fill-box;transform-origin:center;animation:beat 1.2s ease-in-out infinite}
+.couple .kh{opacity:0;transform-box:fill-box;transform-origin:center;animation:kh 6s ease-out infinite}
+@keyframes kh{0%,44%{opacity:0;transform:translateY(0) scale(.5)}55%{opacity:1}85%,100%{opacity:0;transform:translateY(-34px) scale(1.2)}}
+.couple .lbl{font-family:'Dancing Script','Brush Script MT',cursive;font-weight:700;font-size:28px;fill:var(--heart);text-anchor:middle}
+.caption{font-family:'Dancing Script','Brush Script MT',cursive;font-size:1.9rem;font-weight:700;color:var(--heart);margin:6px 0 0}
+#music{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;z-index:9;margin:0;padding:10px 14px;font-size:1.2rem}
+#music.off{opacity:.55}
+@media (prefers-reduced-motion:reduce){.big,.row,.fall,.couple,.couple *{animation:none!important}.couple .ec{opacity:0}}
+</style>
+</head>
+<body>
+<div id="rain" aria-hidden="true"></div>
+<audio id="song" src="aqui-estoy.mp3" loop preload="auto"></audio>
+<button id="music" class="hidden" type="button" aria-label="Pausar o reproducir música">🎵</button>
+
+<section class="card" id="login">
+  <div class="big small" aria-hidden="true">💌</div>
+  <h1>Para ti, mi amor</h1>
+  <p>Entra con tu usuario y tu contraseña para abrir tu regalo 💕</p>
+  <label for="u">Usuario</label>
+  <input id="u" type="text" autocomplete="off" autocapitalize="none" placeholder="¿Quién eres tú?">
+  <label for="p">Contraseña</label>
+  <input id="p" type="password" autocomplete="off" placeholder="La palabra que lo abre todo">
+  <div id="err" role="alert"></div>
+  <button id="enter" type="button">Abrir mi regalo 💖</button>
+  <div><button class="link" id="forgot" type="button">¿No recuerdas la contraseña? 💌</button></div>
+  <div id="hint"></div>
+</section>
+
+<section class="card hidden" id="gift">
+  <div class="big" aria-hidden="true">❤️</div>
+  <h1>Gracias por llegar a mi vida</h1>
+  <div class="row" aria-hidden="true">💖 💗 💓 💗 💖</div>
+  <p>Te amo mucho,</p>
+  <div class="dulce">mi dulce de leche 🍯</div>
+  <div class="row" aria-hidden="true">💕 💞 ❤️ 💞 💕</div>
+  <p>Contigo todo se siente más bonito.</p>
+  <svg class="couple" viewBox="0 0 300 296" role="img" aria-label="Dos personitas tomadas de la mano que se dan un beso: tú y yo">
+    <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7aa8"/><stop offset="1" stop-color="#e0245e"/></linearGradient></defs>
+    <ellipse cx="150" cy="256" rx="112" ry="8" fill="#ff5c93" opacity=".25"/>
+    <path class="bigheart" d="M150 54 C118 33 127 6 150 19 C173 6 182 33 150 54 Z" fill="url(#hg)"/>
+    <text class="kh" x="138" y="96" font-size="16">💗</text>
+    <text class="kh" x="152" y="90" font-size="20" style="animation-delay:.15s">💖</text>
+    <text class="kh" x="166" y="98" font-size="14" style="animation-delay:.3s">💕</text>
+    <!-- ella: cabello trasero -->
+    <ellipse cx="205" cy="110" rx="32" ry="37" fill="#7a3b2a"/>
+    <!-- cuerpos -->
+    <rect x="76" y="196" width="16" height="56" rx="6" fill="#3f5ea8"/><rect x="98" y="196" width="16" height="56" rx="6" fill="#3f5ea8"/>
+    <ellipse cx="84" cy="254" rx="11" ry="6" fill="#2a2a3a"/><ellipse cx="106" cy="254" rx="11" ry="6" fill="#2a2a3a"/>
+    <rect x="72" y="128" width="46" height="76" rx="15" fill="#5aa0ff"/>
+    <rect x="191" y="210" width="9" height="40" rx="4" fill="#ffd9b8"/><rect x="211" y="210" width="9" height="40" rx="4" fill="#ffd9b8"/>
+    <ellipse cx="195" cy="254" rx="11" ry="6" fill="#d6336c"/><ellipse cx="216" cy="254" rx="11" ry="6" fill="#d6336c"/>
+    <path d="M186 130 L224 130 L241 216 L169 216 Z" fill="#ff6fa5" stroke="#ff6fa5" stroke-width="6" stroke-linejoin="round"/>
+    <rect x="89" y="118" width="12" height="14" fill="#ffd9b8"/><rect x="199" y="118" width="12" height="14" fill="#ffd9b8"/>
+    <!-- brazos y manos -->
+    <g stroke-linecap="round" fill="none" stroke-width="13">
+      <path d="M76 140 L68 190" stroke="#5aa0ff"/><path d="M224 140 L232 190" stroke="#ff6fa5"/>
+      <path d="M112 140 L146 172" stroke="#5aa0ff"/><path d="M188 140 L154 172" stroke="#ff6fa5"/>
+    </g>
+    <circle cx="68" cy="195" r="7" fill="#ffd9b8"/><circle cx="232" cy="195" r="7" fill="#ffd9b8"/>
+    <circle cx="146" cy="177" r="8" fill="#ffd9b8"/><circle cx="154" cy="177" r="8" fill="#ffd9b8" stroke="#f0b896" stroke-width="1"/>
+    <!-- él -->
+    <g class="hl">
+      <circle cx="95" cy="98" r="26" fill="#ffd9b8"/>
+      <path d="M69 96 C65 66 90 60 100 63 C118 62 126 80 121 96 C113 82 101 79 92 77 C82 81 74 86 69 96 Z" fill="#4a2c20"/>
+      <circle cx="80" cy="108" r="5" fill="#ff9fb5" opacity=".65"/><circle cx="110" cy="108" r="5" fill="#ff9fb5" opacity=".65"/>
+      <g class="eo"><circle cx="86" cy="99" r="3" fill="#3a2a2a"/><circle cx="104" cy="99" r="3" fill="#3a2a2a"/></g>
+      <g class="ec" fill="none" stroke="#3a2a2a" stroke-width="2" stroke-linecap="round"><path d="M82 100 Q86 95 90 100"/><path d="M100 100 Q104 95 108 100"/></g>
+      <path d="M89 110 Q95 117 101 110" fill="none" stroke="#a8453f" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <!-- ella -->
+    <g class="hr">
+      <circle cx="205" cy="98" r="26" fill="#ffd9b8"/>
+      <path d="M179 96 C177 70 198 65 208 67 C226 67 234 82 231 96 C222 84 210 78 200 78 C190 80 183 88 179 96 Z" fill="#7a3b2a"/>
+      <ellipse cx="224" cy="72" rx="7" ry="5" fill="#ff4d88" transform="rotate(-25 224 72)"/><ellipse cx="234" cy="68" rx="7" ry="5" fill="#ff4d88" transform="rotate(25 234 68)"/><circle cx="229" cy="70" r="3" fill="#e0245e"/>
+      <circle cx="190" cy="108" r="5" fill="#ff9fb5" opacity=".65"/><circle cx="220" cy="108" r="5" fill="#ff9fb5" opacity=".65"/>
+      <g class="eo"><circle cx="196" cy="99" r="3" fill="#3a2a2a"/><circle cx="214" cy="99" r="3" fill="#3a2a2a"/></g>
+      <g class="ec" fill="none" stroke="#3a2a2a" stroke-width="2" stroke-linecap="round"><path d="M192 100 Q196 95 200 100"/><path d="M210 100 Q214 95 218 100"/></g>
+      <path d="M199 110 Q205 117 211 110" fill="none" stroke="#d6336c" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <text class="lbl" x="95" y="288">Tú</text><text class="lbl" x="205" y="288">Yo</text>
+  </svg>
+  <div class="caption">Tú y yo, para siempre 💕</div>
+  <button id="btn" type="button">Toca para más amor 💘</button>
+</section>
+
+<script>
+(function(){
+  var USER='dulce de leche', PASS='tequieromucho';
+  var hearts=['❤️','💖','💗','💕','💓','💘','💝','🩷','💞'];
+  var phrases=[
+    'Eres mi lugar favorito en el mundo 💕',
+    'Contigo, hasta lo simple se vuelve mágico ✨',
+    'Mi corazón sonríe cada vez que pienso en ti 💖',
+    'Eres la mejor casualidad de mi vida 🌷',
+    'Me enamoro de ti un poquito más cada día 💘',
+    'Tu sonrisa es mi parte favorita del día 🌸',
+    'Qué bonito es quererte así 💗',
+    'Eres dulce como mi postre favorito 🍯',
+    'Mi mundo es más bonito desde que llegaste 🌹',
+    'Quiero muchos más días a tu lado 💞',
+    'Tú eres mi calma y mi alegría 🕊️',
+    'Gracias por hacerme tan feliz 🥰',
+    'Eres mi pensamiento más bonito 💭',
+    'Contigo quiero todos mis mañanas 🌅',
+    'Te quiero hoy, mañana y siempre ♾️',
+    'Eres mi razón favorita para sonreír 😊',
+    'Qué suerte tengo de tenerte 🍀',
+    'Mi corazón late más fuerte contigo 💓',
+    'Eres amor del bueno, del que se queda 💝',
+    'Te amo, mi dulce de leche 💖'
+  ];
+  var rain=document.getElementById('rain');
+  function rnd(a,b){return Math.random()*(b-a)+a}
+  function drop(){
+    var s=document.createElement('span');
+    s.className='fall';
+    s.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+    s.style.left=rnd(0,100)+'vw';
+    s.style.fontSize=rnd(14,38)+'px';
+    var d=rnd(6,12);
+    s.style.animationDuration=d+'s';
+    rain.appendChild(s);
+    setTimeout(function(){s.remove()},d*1000);
+  }
+  for(var i=0;i<18;i++){setTimeout(drop,i*250)}
+  setInterval(drop,420);
+
+  function burst(x,y){
+    for(var i=0;i<14;i++){
+      var b=document.createElement('span');
+      b.className='burst';
+      b.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+      var a=rnd(0,Math.PI*2),r=rnd(60,170);
+      b.style.left=x+'px';b.style.top=y+'px';
+      b.style.setProperty('--dx',Math.cos(a)*r+'px');
+      b.style.setProperty('--dy',Math.sin(a)*r+'px');
+      document.body.appendChild(b);
+      setTimeout((function(el){return function(){el.remove()}})(b),1200);
+    }
+  }
+  document.addEventListener('pointerdown',function(e){burst(e.clientX,e.clientY)});
+
+  var order=[],idx=0;
+  function nextPhrase(){
+    if(idx>=order.length){
+      order=phrases.slice().sort(function(){return Math.random()-.5});idx=0;
+    }
+    return order[idx++];
+  }
+  function bubble(){
+    var b=document.createElement('div');
+    b.className='bubble';
+    b.textContent=nextPhrase();
+    b.style.left=rnd(4,25)+'vw';
+    b.style.top=rnd(45,65)+'vh';
+    document.body.appendChild(b);
+    setTimeout(function(){b.remove()},5600);
+  }
+  document.getElementById('btn').addEventListener('click',function(e){
+    var r=e.target.getBoundingClientRect();
+    burst(r.left+r.width/2,r.top);
+    for(var i=0;i<10;i++){setTimeout(drop,i*60)}
+    bubble();
+  });
+
+  var u=document.getElementById('u'),p=document.getElementById('p'),err=document.getElementById('err');
+  var login=document.getElementById('login'),gift=document.getElementById('gift');
+  function norm(s){return s.trim().toLowerCase().replace(/\s+/g,' ')}
+  function tryLogin(){
+    var user=norm(u.value), pass=p.value.trim().toLowerCase();
+    if((user===USER||user==='dulcedeleche')&&pass===PASS){
+      err.textContent='';
+      login.classList.add('hidden');
+      gift.classList.remove('hidden');
+      window.scrollTo(0,0);
+      var song=document.getElementById('song'),mb=document.getElementById('music');
+      mb.classList.remove('hidden');
+      song.volume=.7;
+      var pr=song.play();if(pr&&pr.catch){pr.catch(function(){mb.classList.add('off')})}
+      mb.onclick=function(){if(song.paused){song.play();mb.classList.remove('off')}else{song.pause();mb.classList.add('off')}};
+      for(var i=0;i<30;i++){setTimeout(drop,i*70)}
+    }else{
+      err.textContent='Ups, ese no es el secreto de nuestro amor 💔 Intenta otra vez';
+      login.classList.remove('shake');void login.offsetWidth;login.classList.add('shake');
+    }
+  }
+  document.getElementById('enter').addEventListener('click',tryLogin);
+  [u,p].forEach(function(el){el.addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()})});
+  document.getElementById('forgot').addEventListener('click',function(){
+    document.getElementById('hint').textContent='Usuario: dulce de leche · Contraseña: tequieromucho 💕';
+  });
+})();
+</script>
+</body>
+</html>
